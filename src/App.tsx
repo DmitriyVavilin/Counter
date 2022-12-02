@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Counter} from "./component/Counter";
+import {Button} from "./component/Button";
 
 function App() {
+
+    const [counter, setCounter] = useState(0)
+
+    const ChangeButtonHandler = () => {
+        const num = counter
+        setCounter(num + 1)
+        console.log(num)
+
+    }
+
+    const deleteValueCounter = () => {
+        setCounter(0)
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Counter title={counter}/>
+        <Button name={'inc'} callback={ChangeButtonHandler}/>
+        <Button name={'reset'} callback={deleteValueCounter}/>
     </div>
   );
 }
