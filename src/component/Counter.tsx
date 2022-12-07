@@ -10,7 +10,7 @@ export const Counter = (props: CounterType) => {
 
     return(
         <div className={s.counter_form}>
-        <h1>{title}</h1>
+        <h1 className={title >= 5 ? s.titleRed: s.title}>{title}</h1>
         </div>
     )
 }

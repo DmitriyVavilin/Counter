@@ -6,7 +6,9 @@ import {Button} from "./component/Button";
 function App() {
 
     const [counter, setCounter] = useState(0)
-    const keyValue = 'caunterValue'
+    const keyValue = 'counterValue'
+
+
 
     useEffect(() => {
         let getValue = localStorage.getItem(keyValue)
@@ -24,7 +26,6 @@ function App() {
     const ChangeButtonHandler = () => {
         const num = counter
         setCounter(num + 1)
-
     }
 
     const deleteValueCounter = () => {
