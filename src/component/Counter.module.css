@@ -1,0 +1,9 @@
+.counter_form {
+    text-align: center;
+    margin: 0 auto;
+    border: 5px solid #000000;
+    background-color: aqua;
+    padding: 30px;
+    margin: 5px;
+    border-radius: 10px;
+}
