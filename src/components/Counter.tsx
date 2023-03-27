@@ -35,16 +35,24 @@ export const Counter = () => {
 
 
     return (
-        <div>
-            <span className={storage.startValue >= storage.maxValue ? s.startValue: ''}>{storage.startValue}</span>
-            <Button title={'inc'} callBack={ChangeCounterInc}/>
-            <Button title={'reset'} callBack={removeCounter}/>
+        <>
+            <div className={s.counter_form}>
+                <h1 className={storage.startValue >= storage.maxValue ? s.startValue: ''}>{storage.startValue}</h1>
+                <div className={s.counter_buttons}>
+                    <Button title={'inc'}
+                            callBack={ChangeCounterInc}
+                            disabled={storage.startValue >= storage.maxValue}  />
+                    <Button title={'reset'} callBack={removeCounter}/>
+                </div>
+
+            </div>
+
             <Settings
                 setChangeCounter={setChangeCounter}
                 changeMaxValue={changeMaxValue}
                 changeMinValue={changeMinValue}
                 storage={storage}
             />
-        </div>
+        </>
     )
 }

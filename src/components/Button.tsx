@@ -1,17 +1,17 @@
-import React from "react";
+import React, {ButtonHTMLAttributes} from "react";
 
-type ButtonType = {
+interface ButtonType extends ButtonHTMLAttributes<HTMLButtonElement>{
     title: string
     callBack: () => void
 }
 
-export const Button: React.FC<ButtonType> = ({title,callBack}) => {
+export const Button: React.FC<ButtonType> = ({title,callBack, ...restProps}) => {
 
     const onClickHandler = () => {
         callBack()
     }
 
     return (
-        <button onClick={onClickHandler}>{title}</button>
+        <button type={'button'} onClick={onClickHandler} {...restProps}>{title}</button>
     )
 }
