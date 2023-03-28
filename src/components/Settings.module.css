@@ -13,3 +13,22 @@
 .btn {
     margin-top: 20px;
 }
+
+.btnDefaultSet {
+    margin-left: 30px;
+}
+
+
+input {
+    text-align: center;
+}
+
+.input {
+    text-align: center;
+    border-radius: 5px;
+}
+
+.errorInput {
+    border: 1px solid red;
+    border-radius: 5px;
+}
