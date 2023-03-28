@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {Button} from "./Button";
+import s from './Settings.module.css'
 
 export type StorageType = {
     startValue: number
@@ -23,7 +24,7 @@ export const Settings: React.FC<SettingsType> = ({setChangeCounter, changeMaxVal
 
 
     return (
-        <>
+        <div className={s.settings_form}>
             <div>
                 <span>max value</span>
                 <input type={'number'} onChange={changeMaxValue} value={storage.maxValue}/>
@@ -32,7 +33,7 @@ export const Settings: React.FC<SettingsType> = ({setChangeCounter, changeMaxVal
                 <span>min value</span>
                 <input type={'number'} onChange={changeMinValue} value={storage.minValue}/>
             </div>
-            <Button title={'set'} callBack={() => setSettings()}/>
-        </>
+            <Button className={s.btn} title={'set'} callBack={() => setSettings()}/>
+        </div>
     )
 }

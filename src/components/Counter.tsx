@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {Button} from "./Button";
 import {Settings} from "./Settings";
 import s from './Counter.module.css'
@@ -10,6 +10,23 @@ export const Counter = () => {
         maxValue: 5,
         minValue: 1
     })
+
+
+    useEffect(() => {
+        let valueString = localStorage.getItem('counterValue')
+        if (valueString){
+            let newValue = JSON.parse(valueString)
+            setStorage({...storage,startValue: newValue})
+        }
+    },[])
+
+
+    useEffect(() => {
+        localStorage.setItem('counterValue', JSON.stringify(storage.startValue))
+    },[storage.startValue])
+
+
+
 
     const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         setStorage({...storage, maxValue: Number(e.currentTarget.value)})
@@ -30,29 +47,31 @@ export const Counter = () => {
 
 
     const setChangeCounter = (startValue: number) => {
-        setStorage({...storage,startValue: startValue})
+        setStorage({...storage, startValue: startValue})
     }
+
 
 
     return (
         <>
             <div className={s.counter_form}>
-                <h1 className={storage.startValue >= storage.maxValue ? s.startValue: ''}>{storage.startValue}</h1>
+                <h1 className={storage.startValue >= storage.maxValue ? s.startValue : ''}>{storage.startValue}</h1>
                 <div className={s.counter_buttons}>
                     <Button title={'inc'}
                             callBack={ChangeCounterInc}
-                            disabled={storage.startValue >= storage.maxValue}  />
+                            disabled={storage.startValue >= storage.maxValue}/>
                     <Button title={'reset'} callBack={removeCounter}/>
                 </div>
 
             </div>
-
-            <Settings
-                setChangeCounter={setChangeCounter}
-                changeMaxValue={changeMaxValue}
-                changeMinValue={changeMinValue}
-                storage={storage}
-            />
+            <div >
+                <Settings
+                    setChangeCounter={setChangeCounter}
+                    changeMaxValue={changeMaxValue}
+                    changeMinValue={changeMinValue}
+                    storage={storage}
+                />
+            </div>
         </>
     )
 }
