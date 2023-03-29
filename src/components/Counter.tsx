@@ -6,7 +6,7 @@ import s from './Counter.module.css'
 
 export const Counter = () => {
     const [storage, setStorage] = useState({
-        startValue: 0,
+        startValue: 1,
         maxValue: 5,
         minValue: 1
     })
@@ -21,20 +21,29 @@ export const Counter = () => {
     }, [])
 
 
+    const [error, setError] = useState(false)
+
     const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        if(Number(e.currentTarget.value) <= storage.maxValue) {
+            setError(error)
+        }
         setStorage({...storage, maxValue: Number(e.currentTarget.value)})
     }
 
     const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
+        if(Number(e.currentTarget.value) >= storage.maxValue) {
+            setError(!error)
+        }
         setStorage({...storage, minValue: Number(e.currentTarget.value)})
     }
 
     const ChangeCounterInc = () => {
         setStorage({...storage, startValue: storage.startValue + 1})
+
     }
 
     const removeCounter = () => {
-        let startValue = 0
+        let startValue = 1
         setStorage({...storage, startValue: startValue})
     }
 
@@ -47,18 +56,18 @@ export const Counter = () => {
 
 
     const defaultChangeSettings = () => {
-        let storage = {
-            startValue: 0,
-            maxValue: 5,
-            minValue: 1
-        }
-        setStorage(storage)
+        setStorage({...storage, maxValue: 5, minValue: 1})
     }
+
 
     return (
         <>
             <div className={s.counter_form}>
-                <h1 className={storage.startValue >= storage.maxValue ? s.startValue : ''}>{storage.startValue}</h1>
+                {!error
+                    ?
+                    <h1 className={storage.startValue >= storage.maxValue ? s.startValue : ''}>{storage.startValue}</h1>
+                    : <span>fff</span>
+                }
                 <div className={s.counter_buttons}>
                     <Button title={'inc'}
                             callBack={ChangeCounterInc}

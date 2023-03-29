@@ -21,3 +21,7 @@ button {
   border: none;
   background-color: #2ae8e8;
 }
+
+button:hover {
+  background-color: #2b98b7;
+}
