@@ -15,8 +15,13 @@ type SettingsType = {
     changeMinValue: (e: ChangeEvent<HTMLInputElement>) => void
     defaultChangeSettings: () => void
 }
-export const Settings: React.FC<SettingsType> = ({defaultChangeSettings,setChangeCounter, changeMaxValue, changeMinValue, storage}) => {
-
+export const Settings: React.FC<SettingsType> = ({
+                                                     defaultChangeSettings,
+                                                     setChangeCounter,
+                                                     changeMaxValue,
+                                                     changeMinValue,
+                                                     storage
+                                                 }) => {
 
 
     const setSettings = () => {
@@ -25,26 +30,31 @@ export const Settings: React.FC<SettingsType> = ({defaultChangeSettings,setChang
     }
 
 
-    let startClass = (storage.minValue < 1) || (storage.maxValue - storage.startValue) % storage.minValue !== 0 ? s.errorInput : ''
+    // let startClass = (storage.minValue < 1) || (storage.maxValue - storage.startValue) % storage.minValue !== 0 ? s.errorInput : ''
     let startEndClass = storage.maxValue <= storage.minValue ? s.errorInput : ''
 
-    const setDisabled = storage.maxValue <= storage.minValue
+    const startClass = storage.minValue === storage.maxValue || storage.maxValue <= storage.minValue ||
+        storage.minValue >= storage.maxValue || storage.minValue < 0
+
+    const setDisabledButton = storage.maxValue <= storage.minValue || storage.minValue < 0
 
     return (
         <div className={s.settings_form}>
             <div>
                 <span className={s.text}>max value</span>
-                <input type={'number'} onChange={changeMaxValue} value={storage.maxValue}
-                       />
+                <input type={'number'} className={startClass ? s.errorInput : ''} onChange={changeMaxValue}
+                       value={storage.maxValue}
+                />
             </div>
             <div>
                 <span className={s.text}>min value</span>
-                <input type={'number'} onChange={changeMinValue} value={storage.minValue}
-                       />
+                <input className={startClass ? s.errorInput : ''} type={'number'} onChange={changeMinValue}
+                       value={storage.minValue}
+                />
             </div>
             <div className={s.settings_buttons}>
-                <Button  title={'set'} disabled={setDisabled} callBack={() => setSettings()}/>
-                <Button  title={'default set'} callBack={() => defaultChangeSettings()}/>
+                <Button title={'set'} disabled={setDisabledButton} callBack={() => setSettings()}/>
+                <Button title={'default set'} callBack={() => defaultChangeSettings()}/>
             </div>
         </div>
     )
