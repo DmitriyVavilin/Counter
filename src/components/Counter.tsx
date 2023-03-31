@@ -39,8 +39,8 @@ export const Counter = () => {
     }
 
     const ChangeCounterInc = () => {
-        setStorage({...storage, startValue: storage.startValue + 1})
         localStorage.setItem('counterValue', JSON.stringify(storage.startValue))
+        setStorage({...storage, startValue: storage.startValue + 1})
 
     }
 
