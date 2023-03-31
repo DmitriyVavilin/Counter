@@ -28,20 +28,22 @@ export const Settings: React.FC<SettingsType> = ({defaultChangeSettings,setChang
     let startClass = (storage.minValue < 1) || (storage.maxValue - storage.startValue) % storage.minValue !== 0 ? s.errorInput : ''
     let startEndClass = storage.maxValue <= storage.minValue ? s.errorInput : ''
 
+    const setDisabled = storage.maxValue <= storage.minValue
+
     return (
         <div className={s.settings_form}>
             <div>
                 <span className={s.text}>max value</span>
                 <input type={'number'} onChange={changeMaxValue} value={storage.maxValue}
-                       className={startEndClass}/>
+                       />
             </div>
             <div>
                 <span className={s.text}>min value</span>
                 <input type={'number'} onChange={changeMinValue} value={storage.minValue}
-                       className={startClass}/>
+                       />
             </div>
             <div className={s.settings_buttons}>
-                <Button  title={'set'} callBack={() => setSettings()}/>
+                <Button  title={'set'} disabled={setDisabled} callBack={() => setSettings()}/>
                 <Button  title={'default set'} callBack={() => defaultChangeSettings()}/>
             </div>
         </div>

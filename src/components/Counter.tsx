@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {Button} from "./Button";
-import {Settings} from "./Settings";
+import {Settings, StorageType} from "./Settings";
 import s from './Counter.module.css'
 
 
 export const Counter = () => {
-    const [storage, setStorage] = useState({
+    const [storage, setStorage] = useState<StorageType>({
         startValue: 1,
         maxValue: 5,
         minValue: 1
@@ -21,25 +21,17 @@ export const Counter = () => {
     }, [])
 
 
-    const [error, setError] = useState(false)
-
     const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-        if(Number(e.currentTarget.value) <= storage.maxValue) {
-            setError(error)
-        }
         setStorage({...storage, maxValue: Number(e.currentTarget.value)})
     }
 
     const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        if(Number(e.currentTarget.value) >= storage.maxValue) {
-            setError(!error)
-        }
         setStorage({...storage, minValue: Number(e.currentTarget.value)})
     }
 
     const ChangeCounterInc = () => {
+        debugger
         setStorage({...storage, startValue: storage.startValue + 1})
-
     }
 
     const removeCounter = () => {
@@ -60,14 +52,15 @@ export const Counter = () => {
     }
 
 
+    const errorText = storage.maxValue <= storage.minValue ||
+        storage.minValue >= storage.maxValue
+
+    const errorButton = storage.startValue >= storage.maxValue
     return (
         <>
             <div className={s.counter_form}>
-                {!error
-                    ?
-                    <h1 className={storage.startValue >= storage.maxValue ? s.startValue : ''}>{storage.startValue}</h1>
-                    : <span>fff</span>
-                }
+                <h1 className={errorButton ? s.redButton : ''}>{errorText ?
+                    <span className={errorText ? s.redButton : ''}>'incorrect value'</span> : storage.startValue}</h1>
                 <div className={s.counter_buttons}>
                     <Button title={'inc'}
                             callBack={ChangeCounterInc}
