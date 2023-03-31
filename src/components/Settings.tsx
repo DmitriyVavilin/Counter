@@ -29,10 +29,6 @@ export const Settings: React.FC<SettingsType> = ({
         setChangeCounter(minValue)
     }
 
-
-    // let startClass = (storage.minValue < 1) || (storage.maxValue - storage.startValue) % storage.minValue !== 0 ? s.errorInput : ''
-    let startEndClass = storage.maxValue <= storage.minValue ? s.errorInput : ''
-
     const startClass = storage.minValue === storage.maxValue || storage.maxValue <= storage.minValue ||
         storage.minValue >= storage.maxValue || storage.minValue < 0
 
@@ -54,7 +50,7 @@ export const Settings: React.FC<SettingsType> = ({
             </div>
             <div className={s.settings_buttons}>
                 <Button title={'set'} disabled={setDisabledButton} callBack={() => setSettings()}/>
-                <Button title={'default set'} callBack={() => defaultChangeSettings()}/>
+                <Button title={'set default'} callBack={() => defaultChangeSettings()}/>
             </div>
         </div>
     )

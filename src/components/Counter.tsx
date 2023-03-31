@@ -11,6 +11,7 @@ export const Counter = () => {
         minValue: 1
     })
 
+    const [settings, SetSettings] = useState(false)
 
     useEffect(() => {
         let valueString = localStorage.getItem('counterValue')
@@ -59,6 +60,9 @@ export const Counter = () => {
     return (
         <>
             <div className={s.counter_form}>
+                <div>
+                    <Button title={'show settings'} callBack={()=>SetSettings(!settings)}/>
+                </div>
                 <h1 className={errorButton ? s.redButton : ''}>{errorText ?
                     <span className={errorText ? s.redButton : ''}>'incorrect value'</span> : storage.startValue}</h1>
                 <div className={s.counter_buttons}>
@@ -70,13 +74,15 @@ export const Counter = () => {
 
             </div>
             <div>
-                <Settings
-                    setChangeCounter={setChangeCounter}
-                    changeMaxValue={changeMaxValue}
-                    changeMinValue={changeMinValue}
-                    storage={storage}
-                    defaultChangeSettings={defaultChangeSettings}
-                />
+                {settings === true &&
+                    <Settings
+                        setChangeCounter={setChangeCounter}
+                        changeMaxValue={changeMaxValue}
+                        changeMinValue={changeMinValue}
+                        storage={storage}
+                        defaultChangeSettings={defaultChangeSettings}
+                    />
+                }
             </div>
         </>
     )
