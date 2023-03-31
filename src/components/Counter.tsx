@@ -31,7 +31,6 @@ export const Counter = () => {
     }
 
     const ChangeCounterInc = () => {
-        debugger
         setStorage({...storage, startValue: storage.startValue + 1})
     }
 
