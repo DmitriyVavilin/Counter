@@ -21,15 +21,6 @@ export const Counter = () => {
         }
     }, [])
 
-    // useEffect(()=>{
-    //     let counterValue = localStorage.getItem('counterValue')
-    //     if(counterValue){
-    //         let newValue = JSON.parse(counterValue)
-    //         setStorage(newValue)
-    //     }
-    // },[storage.startValue])
-
-
     const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         setStorage({...storage, maxValue: Number(e.currentTarget.value)})
     }
@@ -39,7 +30,6 @@ export const Counter = () => {
     }
 
     const ChangeCounterInc = () => {
-        // localStorage.setItem('counterValue', JSON.stringify(storage.startValue))
         setStorage({...storage, startValue: storage.startValue + 1})
 
     }
