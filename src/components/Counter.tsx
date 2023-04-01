@@ -21,13 +21,13 @@ export const Counter = () => {
         }
     }, [])
 
-    useEffect(()=>{
-        let counterValue = localStorage.getItem('counterValue')
-        if(counterValue){
-            let newValue = JSON.parse(counterValue)
-            setStorage(newValue)
-        }
-    },[])
+    // useEffect(()=>{
+    //     let counterValue = localStorage.getItem('counterValue')
+    //     if(counterValue){
+    //         let newValue = JSON.parse(counterValue)
+    //         setStorage(newValue)
+    //     }
+    // },[storage.startValue])
 
 
     const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +39,7 @@ export const Counter = () => {
     }
 
     const ChangeCounterInc = () => {
-        localStorage.setItem('counterValue', JSON.stringify(storage.startValue))
+        // localStorage.setItem('counterValue', JSON.stringify(storage.startValue))
         setStorage({...storage, startValue: storage.startValue + 1})
 
     }
@@ -62,10 +62,9 @@ export const Counter = () => {
     }
 
 
-    const errorText = storage.maxValue <= storage.minValue ||
-        storage.minValue >= storage.maxValue
-
+    const errorText = storage.maxValue <= storage.minValue || storage.minValue >= storage.maxValue
     const errorButton = storage.startValue >= storage.maxValue
+
     return (
         <>
             <div className={s.counter_form}>
