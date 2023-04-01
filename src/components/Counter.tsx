@@ -62,7 +62,7 @@ export const Counter = () => {
     }
 
 
-    const errorText = storage.maxValue <= storage.minValue || storage.minValue >= storage.maxValue
+    const errorText = storage.maxValue <= storage.minValue || storage.minValue >= storage.maxValue || storage.minValue < 0
     const errorButton = storage.startValue >= storage.maxValue
 
     return (
